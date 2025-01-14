@@ -6,13 +6,15 @@ const morgan = require('morgan');
 const connectDB = require('./src/config/db');
 const cors = require('cors');
 
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
 dotenv.config({ path: './.env' });
 
 connectDB();
 
 const transactions = require('./src/routes/transactions');
-
-const app = express();
 
 app.use(express.json());
 
@@ -29,7 +31,7 @@ if(process.env.NODE_ENV === 'development') {
 
 app.use('/api/v1/transactions', transactions);
 
-const PORT = process.env.PORT || 3000;
+
 
 app.get('/', (req, res)=> {
   res.send('Home')
