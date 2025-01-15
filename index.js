@@ -14,7 +14,7 @@ dotenv.config({ path: './.env' });
 
 connectDB();
 
-const transactions = require('./src/routes/transactions');
+const transactions = require('./src/routes/transactions.js');
 
 app.use(express.json());
 
