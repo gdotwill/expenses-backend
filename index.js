@@ -19,6 +19,10 @@ app.use(express.json());
 
 app.use('/api/v1/transactions', transactions);
 
+app.get('/', (req, res)=> {
+  res.send('Home')
+})
+
 app.use(cors({
   origin: true,
   methods: 'GET, POST, OPTIONS, PUT, DELETE, PATCH',
@@ -30,9 +34,6 @@ if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res)=> {
-  res.send('Home')
-})
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
 
