@@ -5,6 +5,7 @@ const colors = require('colors');
 const morgan = require('morgan');
 const connectDB = require('./src/config/db');
 const cors = require('cors');
+const transactions = require('./src/routes/transactions');
 
 const app = express();
 
@@ -14,9 +15,9 @@ dotenv.config({ path: './.env' });
 
 connectDB();
 
-const transactions = require('./src/routes/transactions.js');
-
 app.use(express.json());
+
+app.use('/api/v1/transactions', transactions);
 
 app.use(cors({
   origin: true,
@@ -28,8 +29,6 @@ app.use(cors({
 if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
-app.use('/api/v1/transactions', transactions);
 
 app.get('/', (req, res)=> {
   res.send('Home')
